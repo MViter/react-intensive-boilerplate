@@ -16,7 +16,6 @@
     "css-loader": "0.28.4",
     "dotenv": "4.0.0",
     "enzyme": "^3.1.0",
-    "eslint": "4.4.1",
     "eslint-config-react-app": "^2.0.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.35.0",
@@ -29,6 +28,7 @@
     "gsap": "^1.20.2",
     "html-webpack-plugin": "2.29.0",
     "jest": "^21.2.1",
+    "masonry-layout": "^4.2.0",
     "moment": "^2.18.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
@@ -57,6 +57,7 @@
   "devDependencies": {
     "babel-preset-stage-0": "^6.24.1",
     "enzyme-adapter-react-16": "^1.0.1",
+    "eslint": "^4.4.1",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.0.2",
     "prop-types": "^15.5.10",

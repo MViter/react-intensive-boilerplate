@@ -1,22 +1,25 @@
 // Core
 import React, { Component } from 'react';
 
-// Instruments
-import Styles from './styles.scss';
-import moment from 'moment';
+// Components
+import Grid from '../../Components/Grid';
+
+const appID = '3264416afcb24672bfe70507c20a5562';
+const sourceName = 'bbc-news';
+
+export const option = {
+    api: `https://newsapi.org/v1/articles?source=${sourceName}&apiKey=${appID}`
+};
 
 export default class App extends Component {
 
     timer = setInterval(() => this.forceUpdate(), 1000);
 
     render () {
+
+
         return (
-            <section className = { Styles.app }>
-                <h1>Welcome!</h1>
-                <p>
-                    It is {moment().format('MMMM D h:mm:ss a')}.
-                </p>
-            </section>
+               <Grid />
         );
     }
 }
