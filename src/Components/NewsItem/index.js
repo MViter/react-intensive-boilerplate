@@ -9,34 +9,37 @@ import Styles from './styles.scss';
 export default class NewsItem extends Component {
 
     static propTypes = {
-        _id:            string.isRequired,
-        author:         string.isRequired,
-        title:          string.isRequired,
-        description:    string.isRequired,
-        url:            string.isRequired,
-        urlToImage:     string.isRequired,
-        publishedAt:    string.isRequired,
-        status:         string.isRequired,
-        source:         string.isRequired,
-        sortBy:         string.isRequired
+        _id:         string.isRequired,
+        author:      string.isRequired,
+        description: string.isRequired,
+        publishedAt: string.isRequired,
+        sortBy:      string.isRequired,
+        source:      string.isRequired,
+        status:      string.isRequired,
+        title:       string.isRequired,
+        url:         string.isRequired,
+        urlToImage:  string.isRequired
     };
 
     render () {
 
-        const { source, status, author, sortBy, title, description, url, urlToImage, publishedAt } = this.props;
+        const { source, author, title, description, url, urlToImage, publishedAt } = this.props;
+
         console.log('urlToImage = ', urlToImage);
         console.log('url = ', url);
         console.log('autor = ', author);
         console.log('title = ', title);
 
         const time = publishedAt.split('T').join(' ');
+        const srcToSourceImg = `../../theme/assets/sources/${source}.png`;
 
         console.log('###source = ', this.context.source);
+
         return (
             <section className = { Styles.container }>
                 <div className = { Styles.newsItem }>
                     <a href = { url } >
-                        <img alt = { source } src = '`../../theme/assets/sources/${source}.png`' />
+                        <img alt = { source } src = { srcToSourceImg } />
                         <img alt = 'news shortcut' src = { urlToImage } />
                         <p className = { Styles.title }> { title } </p>
                         <p className = { Styles.author }> { author } </p>
@@ -46,5 +49,5 @@ export default class NewsItem extends Component {
                 </div>
             </section>
         );
-    };
+    }
 }
