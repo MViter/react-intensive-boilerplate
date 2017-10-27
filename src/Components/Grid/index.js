@@ -29,13 +29,15 @@ export default class Grid extends Component {
 
     state = {
         news: {
+            status:   '',
+            source:   '',
+            sortBy:   '',
             articles: []
         }
 
     };
 
-    /*
-    state = {
+    /* state = {
         news:
              {
             "status": "ok",
@@ -104,13 +106,6 @@ export default class Grid extends Component {
                     "url": "http://www.bbc.co.uk/news/world-us-canada-41759519",
                     "urlToImage": "https://ichef.bbci.co.uk/news/1024/cpsprodpb/2FD8/production/_98484221_composite1.jpg",
                     "publishedAt": "2017-10-26T09:27:31Z"
-                }, {
-                    "author": "BBC News",
-                    "title": "Ancient skull 'oldest tsunami victim'",
-                    "description": "The person is likely to have died in Papua New Guinea about 6,000 years ago, scientists say.",
-                    "url": "http://www.bbc.co.uk/news/world-asia-41757232",
-                    "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/0468/production/_98482110_aitapeskull.jpg",
-                    "publishedAt": "2017-10-26T06:34:46Z"
                 }
                 ]}
     }; */
@@ -144,20 +139,21 @@ export default class Grid extends Component {
             }
 
             return response.json();
-        }).then(({ response }) =>
-            this.setState = function (){
-            console.log("response ", response);
+        }).then(({ response }) => {
+            this.setState = (() => ({
                 news: response
-            })
-
+            }));
+        })
             .catch(({ message }) => console.log(message));
     }
 
+
     render () {
 
-        const { news: { articles },  status, source, sortBy }  = this.state;
+        const { news: { articles }, status, source, sortBy }  = this.state;
 
-        console.log(' articles ', articles ); // []
+        console.log('articles ', articles); // []
+
         return (
             <section className = { Styles.grid }>
                 <div>
