@@ -115,17 +115,16 @@ export default class Grid extends Component {
                 ]}
     }; */
 
-
     componentWillMount () {
 
         this._getNews();
-
         this.refetchNews = setInterval(
             () => this.getNews(), 10000
         );
     }
 
     componentWillUnmount () {
+
         clearInterval(this.refetchNews);
     }
 
@@ -133,15 +132,12 @@ export default class Grid extends Component {
 
         const { appID, api, sourceName, sortBy } = this.props;
 
-        console.log('URL = ', `${api}v1/articles?source=${sourceName}&apiKey=${appID}`);
-
         fetch(`${api}v1/articles?source=${sourceName}&apiKey=${appID}`,
             {
                 method: 'GET'
             }).then((response) => {
 
-            // console.log(response.status); // 200
-            // console.log(response.json());
+            //console.log(response.json()); // Promise {[[PromiseStatus]]: "resolved", [[PromiseValue]]: {…}}
 
             if (response.status !== 200) {
                 throw new Error('News were not loaded.');
@@ -149,22 +145,19 @@ export default class Grid extends Component {
 
             return response.json();
         }).then(({ response }) =>
-            this.setState(() => ({
-                news: response.json()
-            })))
+            this.setState = function (){
+            console.log("response ", response);
+                news: response
+            })
+
             .catch(({ message }) => console.log(message));
     }
 
-    // {"status":"ok","source":"mtv-news","sortBy":"top",
-    // "articles":[
-    // {"author":"Madeline Roth","title":"Playing Camila Cabello’s Grandmother In ‘Havana’ Video Let LeJuan James Go Totally Off-Script","description":"He tells MTV News why working with Camila was 'a match made in heaven'","url":"http://www.mtv.com/news/3043585/lejuan-james-interview-camila-cabello-havana-video/","urlToImage":"https://imagesmtv-a.akamaihd.net/uri/mgid:ao:image:mtv.com:254939?quality=0.8&format=jpg&width=1440&height=810&.jpg","publishedAt":"2017-10-25T19:18:51Z"},
-    // {"author":"Crystal Bell","title":"Riverdale Season 2 Is Going To Feel Like 'Zodiac In A Small-Town,' Says Creator","description":"'Riverdale' creator Roberto Aguirre-Sacasa says Season 2 is going to feel like 'Zodiac' in a small-town.","url":"http://www.mtv.com/news/3043660/riverdale-season-2-zodiac-roberto-aguirre-sacasa/","urlToImage":"https://imagesmtv-a.akamaihd.net/uri/mgid:ao:image:mtv.com:254983?quality=0.8&format=jpg&width=1440&height=810&.jpg","publishedAt":"2017-10-25T22:40:09Z"},{"author":"Valentina De Santis","title":"18 Times Drake's Mom Gave Him More Life","description":"It takes a Champagne Mommy to raise a Champagne Papi","url":"http://www.mtv.com/news/3043452/drake-mom-sandra-graham-more-life/","urlToImage":"https://imagesmtv-a.akamaihd.net/uri/mgid:ao:image:mtv.com:254974?quality=0.8&format=jpg&width=1440&height=810&.jpg","publishedAt":"2017-10-25T21:42:07Z"},
-    // {"author":"Madeline Roth","title":"Selena Gomez Shares Her Honest Review Of Taylor Swift’s Reputation","description":"'She's killing it'","url":"http://aofe.alwayson.io/3043725/selena-gomez-review-taylor-swift-reputation/","urlToImage":"https://imagesmtv-a.akamaihd.net/uri/mgid:ao:image:mtv.com:255014?quality=0.8&format=jpg&width=1440&height=810&.jpg","publishedAt":"2017-10-25T23:48:15Z"},{"author":"Deepa Lakshmin","title":"Meet The Super Fan Who Followed Lorde Across A Continent","description":"MTV News spoke to Georgia Burke, Lorde's 'beautiful angel'","url":"http://www.mtv.com/news/3043164/lorde-fan-follow-europe-tour-tweet-georgia-burke-interview/","urlToImage":"https://imagesmtv-a.akamaihd.net/uri/mgid:ao:image:mtv.com:252809?quality=0.8&format=jpg&width=1440&height=810&.jpg","publishedAt":"2017-10-25T14:34:02Z"}]}
-
     render () {
 
-        const { news: { status, source, sortBy, articles }}  = this.state;
+        const { news: { articles },  status, source, sortBy }  = this.state;
 
+        console.log(' articles ', articles ); // []
         return (
             <section className = { Styles.grid }>
                 <div>
