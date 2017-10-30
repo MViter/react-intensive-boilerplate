@@ -25,15 +25,9 @@ export default class NewsItem extends Component {
 
         const { source, author, title, description, url, urlToImage, publishedAt } = this.props;
 
-        console.log('urlToImage = ', urlToImage);
-        console.log('url = ', url);
-        console.log('autor = ', author);
-        console.log('title = ', title);
+        const time = publishedAt.split('T').join(' ').split('Z').join('');
 
-        const time = publishedAt.split('T').join(' ');
         const srcToSourceImg = `../../theme/assets/sources/${source}.png`;
-
-        console.log('###source = ', this.context.source);
 
         return (
             <section className = { Styles.container }>

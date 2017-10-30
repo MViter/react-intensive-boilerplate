@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import Grid from '../../Components/Grid';
 
 export const appID = '3264416afcb24672bfe70507c20a5562';
-export const sourceName = 'mtv-news';
 export const api = 'https://newsapi.org/';
+export const sourceName = 'usa-today';
 
 export default class App extends Component {
 

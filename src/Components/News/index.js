@@ -11,24 +11,15 @@ import NewsItem from '../NewsItem';
 export default class News extends Component {
 
     static propTypes = {
-        _id:         string.isRequired,
-        articles:    array.isRequired,
-        author:      string.isRequired,
-        description: string.isRequired,
-        publishedAt: string.isRequired,
-        sortBy:      string.isRequired,
-        source:      string.isRequired,
-        status:      string.isRequired,
-        title:       string.isRequired,
-        url:         string.isRequired,
-        urlToImage:  string.isRequired
+        articles:    array.isRequired
     };
 
     render () {
 
-        //const { status, source, sortBy } = this.props;
         const { articles } = this.props;
+        console.log('In \'News\', articles = ', articles );
 
+        //console.log('&&& In News articles: ', articles[2].title);
         const newsList = articles.map(({ source, author, title, description, itemUrl, urlToImage, publishedAt }, index) => (
             <NewsItem
                 author = { articles[index].author }
@@ -44,7 +35,7 @@ export default class News extends Component {
 
         return (
             <section className = { Styles.container }>
-                { newsList }
+               { newsList }
             </section>
         );
     }
