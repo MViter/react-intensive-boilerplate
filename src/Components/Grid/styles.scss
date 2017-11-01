@@ -1,5 +1,12 @@
 .grid{
   display: flex;
   justify-content: center;
+  order: 1;
+}
 
+.filterBlockWrap{
+  flex-direction: column;
+  justify-content: flex-start;
+  order: -1;
+  top: 290px;
 }

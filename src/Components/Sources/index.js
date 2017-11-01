@@ -17,10 +17,10 @@ export default class Sources extends Component {
     render () {
 
         const { sources } = this.props;
-        console.log('In \'Sources\', sources = ', sources );
 
         const sourcesList = sources.map(({ id, name, description, category, country, language, url }, index) => (
             <Source
+                avatar = { `'../../theme/assets/sourcePict/${sources[index].id}.png'` }
                 category = { sources[index].category }
                 country = { sources[index].country }
                 description = { sources[index].description }

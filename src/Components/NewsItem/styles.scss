@@ -18,25 +18,38 @@ img{
      -webkit-transition: box-shadow .3s;
      transition: box-shadow .3s;
      word-wrap: break-word;
+     color: #365899;
 
      &:hover {
        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
        cursor: pointer;
      }
 
+      a{
+        text-decoration: none;
+      }
+
       .title {
-         color: #365899;
-         font-weight: 800;
+
+         font-weight: 600;
          font-size: 20px;
          text-decoration: none;
       }
 
      .time {
        font-size: 12px;
-       font-style: italic;
        color: grey;
      }
+
+     .source {
+       color: grey;
+     }
+
      .author {
+
+     }
+
+     .description {
 
      }
 }

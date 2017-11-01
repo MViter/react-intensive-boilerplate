@@ -9,13 +9,8 @@ import Styles from './styles.scss';
 export default class NewsItem extends Component {
 
     static propTypes = {
-        _id:         string.isRequired,
-        author:      string.isRequired,
         description: string.isRequired,
-        publishedAt: string.isRequired,
-        sortBy:      string.isRequired,
         source:      string.isRequired,
-        status:      string.isRequired,
         title:       string.isRequired,
         url:         string.isRequired,
         urlToImage:  string.isRequired
@@ -25,19 +20,20 @@ export default class NewsItem extends Component {
 
         const { source, author, title, description, url, urlToImage, publishedAt } = this.props;
 
-        const time = publishedAt.split('T').join(' ').split('Z').join('');
-
-        const srcToSourceImg = `../../theme/assets/sources/${source}.png`;
+        let time;
+        time = publishedAt ?
+            time = publishedAt.split('T').join(' ').split('Z').join('')
+            : null;
 
         return (
             <section className = { Styles.container }>
                 <div className = { Styles.newsItem }>
                     <a href = { url } >
-                        <img alt = { source } src = { srcToSourceImg } />
                         <img alt = 'news shortcut' src = { urlToImage } />
                         <p className = { Styles.title }> { title } </p>
                         <p className = { Styles.author }> { author } </p>
                         <p className = { Styles.description }> { description }</p>
+                        <p className = { Styles.source }> { source }</p>
                         <p className = { Styles.time }> { time }</p>
                     </a>
                 </div>

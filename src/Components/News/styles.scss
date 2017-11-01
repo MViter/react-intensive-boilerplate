@@ -1,9 +1,11 @@
 .container {
+  top: 90px;
   display: flex;
   width: 1180px;
   flex-wrap: wrap;
   background-color: #E9EBEE;
   justify-content: center;
+  position: relative;
 }
 
 

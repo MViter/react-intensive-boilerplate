@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 // Instruments
 import { string, array, object } from 'prop-types';
 import Styles from './styles.scss';
-import avatar from '../../theme/assets/sourcePict/apple-touch-icon.png';
+import avatar from '../../theme/assets/sourcePict/bbc-news.png';
+
 
 export default class Sources extends Component {
 
@@ -20,12 +21,12 @@ export default class Sources extends Component {
 
     render () {
 
-        const { id, name, description, category, country, language, url }  = this.props;
+        const { id, name, description, category, country, language, url } = this.props;
 
         return (
             <section className = { Styles.source } >
                 <div className = { Styles.baseInfo } >
-                    <img className = { Styles.sourceimg } alt = 'sourceimg' src = { avatar } />
+                    <img className = { Styles.sourceimg } src = { avatar } />
                     <div className = { Styles.baseInfoNameID } >
                         <a className = { Styles.name } href = { url }>{ name }</a>
                         <div className = { Styles.id } >{ id }</div>

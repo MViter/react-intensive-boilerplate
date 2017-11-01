@@ -1,0 +1,20 @@
+
+.container {
+  top: 100px;
+  display: flex;
+  width: 1180px;
+  flex-wrap: wrap;
+  background-color: #E9EBEE;
+  position: relative;
+}
+
+.searchfield {
+  width: 100%;
+  position: relative;
+  height: 30px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  border: 5px solid #4ed2b2;
+  border-radius: 5px;
+}
