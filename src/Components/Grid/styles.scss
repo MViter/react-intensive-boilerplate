@@ -1,12 +1,23 @@
-.grid{
+.container {
   display: flex;
   justify-content: center;
   order: 1;
-}
+  background-color: #adf3e0;
 
-.filterBlockWrap{
-  flex-direction: column;
-  justify-content: flex-start;
-  order: -1;
-  top: 290px;
+  /*.filterBlockWrap {
+    float: left;
+    width: 260px;
+    margin-left: -100%;
+    font-size: 13px;
+    position: relative;
+  }*/
+
+  /*.contentWrap {
+    position: relative;
+    flex-direction: row;
+    display: flex;
+    vertical-align: baseline;
+    font-size: 100%;
+
+  }*/
 }

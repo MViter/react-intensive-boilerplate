@@ -6,7 +6,7 @@ import { string, array, object } from 'prop-types';
 import Styles from './styles.scss';
 
 // Components
-import Source from '../Source';
+import SourceItem from '../SourceItem';
 
 export default class Sources extends Component {
 
@@ -16,10 +16,12 @@ export default class Sources extends Component {
 
     render () {
 
-        const { sources } = this.props;
+        const { sources, isForFilter } = this.props;
+        const styleForSource = isForFilter? 'Styles.filter' : 'Styles.info';
+        //const sourceStyle = ${Styles.header} ${true ? Styles.red : Styles.blue}
 
         const sourcesList = sources.map(({ id, name, description, category, country, language, url }, index) => (
-            <Source
+            <SourceItem
                 avatar = { `'../../theme/assets/sourcePict/${sources[index].id}.png'` }
                 category = { sources[index].category }
                 country = { sources[index].country }

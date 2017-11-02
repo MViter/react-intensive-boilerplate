@@ -7,7 +7,7 @@ import Styles from './styles.scss';
 import avatar from '../../theme/assets/sourcePict/bbc-news.png';
 
 
-export default class Sources extends Component {
+export default class SourceItems extends Component {
 
     static propTypes = {
         id: string.isRequired,

@@ -1,5 +1,5 @@
 {
-  "name": "Lectrum",
+  "name": "NewsAPIclient",
   "version": "0.1.0",
   "homepage": "http://myname.github.io/",
   "private": true,
@@ -29,6 +29,7 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "^21.2.1",
     "masonry-layout": "^4.2.0",
+    "material-ui": "^0.19.4",
     "moment": "^2.18.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",

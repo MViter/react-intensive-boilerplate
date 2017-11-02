@@ -9,6 +9,7 @@ import Styles from './styles.scss';
 import News from '../News';
 import Header from '../Header';
 import Search from '../Search';
+import Filter from '../Filter';
 
 export default class Grid extends Component {
 
@@ -32,11 +33,12 @@ export default class Grid extends Component {
     componentWillMount () {
 
         this._getSources(this._getNews);
+
+
     }
 
     componentWillUnmount () {
-        // clearInterval(this.refetchNews);
-        // clearInterval(this.refetchSources);
+        clearInterval(this.refetchNews);
     }
 
     _getSources (callback) {
@@ -73,8 +75,9 @@ export default class Grid extends Component {
         //const sourceName = 'usa-today';
         //const { appID, api } = this.props;
 
-        const appID = '3264416afcb24672bfe70507c20a5562';
-        const api = 'https://newsapi.org/';
+        //const appID = '3264416afcb24672bfe70507c20a5562';
+        //const api = 'https://newsapi.org/';
+        const { api, appID } = this.props;
 
         fetch(`${api}v1/articles?source=${sourceName}&apiKey=${appID}`,
             {
@@ -96,22 +99,21 @@ export default class Grid extends Component {
 
     render () {
 
-        /*<div className = {Styles.filterBlockWrap} >
-                    <Filter sources = { sources } sourcesIDList = { sourcesIDList } />
-                </div>
-         */
-
         if (this.state.loading) {
             console.log('waiting for data');
             //return <h2>Loading...</h2>;
         }
 
-        const { news } = this.state;
+        const { news, sources } = this.state;
+        const { api } = this.props;
 
         return (
-            <section className = { Styles.grid }>
-                <div className = { Styles.middlecontainer }>
-                    <Header />
+            <section className = { Styles.container } >
+                <Header />
+                <div className = { Styles.filterBlockWrap } >
+                    <Filter api = { api } getNews = { this.getNews } />
+                </div>
+                <div className = { Styles.contentWrap }>
                     <Search />
                     <News news = { news } />
                 </div>
