@@ -2,58 +2,49 @@
 import React, { Component } from 'react';
 
 // Instruments
-import { string, array, object, func } from 'prop-types';
+import { func, string } from 'prop-types';
 import Styles from './styles.scss';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-
-const styles = {
-    customWidth: {
-        width: 200,
-    },
-};
 
 export default class FilterItem extends Component {
 
-    static contextTypes = {
-        getNews: func.isRequired
+
+    static propTypes = {
+        getNews:                   func.isRequired,
+        getNewsFromDefinedSources: func.isRequired,
+        sourceID:                  string.isRequired
     };
 
     constructor () {
         super();
-        this.handleCheckboxChanging = ::this._handleCheckboxChanging;
+        this.handleCheckboxClicking = ::this._handleCheckboxClicking;
+        // this.getNewsFromDefinedSources = ::this._getNewsFromDefinedSources;
     }
 
-    state = {
-        checkedSources: ''
-    };
-
-    _handleCheckboxChanging (event) {
+    _handleCheckboxClicking (event) {
+        //event.preventDefault();
         const checkBoxValue = event.target.value;
-        console.log('event.target.value', event.target.value);
-        //this.setState(() =>{
+        const isChecked = event.target.checked;
 
-        //});
-        console.log('!!! this.props ', this.props);
-        console.log('!!! this.context ', this.context);
+        console.log('event.target.checked = ', event.target.checked);
 
-        this.context.getNews(checkBoxValue);
+        this.props.getNewsFromDefinedSources(checkBoxValue, this.props.getNews, isChecked);
 
     }
-
 
     render () {
 
-        const { sourceId  } = this.props;
+        const { sourceID } = this.props;
 
         return (
             <section className = { Styles.container } >
                 <div className = { Styles.filterItem } >
-                    <input type = 'checkbox'
-                           checked
-                           value = { sourceId }
-                           onChange = { this.handleCheckboxChanging } />
-                    <a href = '#'>{ sourceId }</a>
+                    <input
+                        type = 'checkbox'
+                        //checked = {sourceID.indexOf(sourceIDs) !== -1}
+                        value = { sourceID }
+                        onClick = { this.handleCheckboxClicking }
+                    />
+                    <a href = '#'>{ sourceID }</a>
                 </div>
             </section>
         );

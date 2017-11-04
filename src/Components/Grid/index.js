@@ -10,6 +10,7 @@ import News from '../News';
 import Header from '../Header';
 import Search from '../Search';
 import Filter from '../Filter';
+import StartPage from '../StartPage';
 
 export default class Grid extends Component {
 
@@ -20,63 +21,107 @@ export default class Grid extends Component {
 
     constructor () {
         super();
-        this.state = {
-            loading: false,
-            news:    [],
-            sources: []
-        };
 
-        this.getSources = ::this._getSources;
         this.getNews = ::this._getNews;
+        this.getNewsFromDefinedSources = ::this._getNewsFromDefinedSources;
+        this.getNewsFromSearch = ::this._getNewsFromSearch;
+        this.handleSearchInput = ::this._handleSearchInput;
     }
 
-    componentWillMount () {
+    state = {
+        sources:              [],
+        loading:              false,
+        news:                 [],
+        filteredBySearchNews: [],
+        searchCriteria:       ''
+    };
 
-        this._getSources(this._getNews);
+    _getNewsFromDefinedSources (targetSource, callback, isChecked) {
 
+        isChecked ?
+            this.setState((prevState) => ({ sources: [...prevState.sources, targetSource]}), this._getNewsForAllSources)
+            : this.setState((prevState) => {
+                prevState.sources.splice(prevState.sources.indexOf(targetSource), 1);
 
+                return {
+                    sources: prevState.sources
+                };
+            }, this._getNewsForAllSources);
     }
 
-    componentWillUnmount () {
-        clearInterval(this.refetchNews);
+    _getNewsFromSearch () {
+        const searchCriteria = this.state.searchCriteria.toLowerCase();
+
+        this.setState((prevValue) => {
+            const filteredNews = prevValue.news.map((item) => ({
+                source:   item.source,
+                articles: item.articles.filter((articles) => articles.title.toLowerCase().indexOf(searchCriteria) > -1)
+            }));
+
+            return {
+                filteredBySearchNews: filteredNews
+            };
+        });
     }
 
-    _getSources (callback) {
+    /*_getSources (callback) {
 
-        const { api } = this.props;
+        // const { api } = this.props;
+        //
+        // // this.setState({ loading: true });
+        // fetch(`${api}v1/sources`,
+        //     {
+        //         method: 'GET'
+        //     }).then((response) => {
+        //
+        //     if (response.status !== 200) {
+        //         throw new Error('Sources were not loaded.');
+        //     }
+        //
+        //     return response.json();
+        // }).then(({ sources }) => {
 
-        this.setState({ loading: true });
-        fetch(`${api}v1/sources`,
-            {
-                method: 'GET'
-            }).then((response) => {
-
-            if (response.status !== 200) {
-                throw new Error('Sources were not loaded.');
-            }
-
-            return response.json();
-        }).then((response) => {
-
-            this.setState({ sources: response.sources, loading: false });
+            this.setState({ loading: false });
 
             this.state.sources.forEach((source) => {
-                callback.call(this, source.id);
+                callback.call(this, source);
             });
 
-        })
-            .catch(({ message }) => console.log(message));
+        // })
+        //     .catch(({ message }) => console.log(message));
+    } */
+
+    _getNewsForAllSources () {
+        this.setState(() => ({// {news}
+            news: []
+        }), () => {
+            if (this.state.sources) {
+                this.state.sources.forEach((source) => {
+                    this.getNews(source);
+                });
+            }
+        });
+    }
+
+    compareBySource (news1, news2) {
+        if (news1.source < news2.source) {
+            return -1;
+        }
+        if (news1.source > news2.source) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    _handleSearchInput (value) {
+        this.setState({
+            searchCriteria: value
+        }, this.getNewsFromSearch);
     }
 
     _getNews (sourceName) {
 
-        //console.log('$$$ this.props', this.props);
-        //const { sourcesIDList } = this.props;
-        //const sourceName = 'usa-today';
-        //const { appID, api } = this.props;
-
-        //const appID = '3264416afcb24672bfe70507c20a5562';
-        //const api = 'https://newsapi.org/';
         const { api, appID } = this.props;
 
         fetch(`${api}v1/articles?source=${sourceName}&apiKey=${appID}`,
@@ -89,36 +134,46 @@ export default class Grid extends Component {
             }
 
             return response.json();
-        }).then((response) => {
-            this.setState(() => ({
-                news: this.state.news.concat(response)
-            }));
+        }).then(({ articles, source }) => {
+
+            this.setState(({ news }) => {
+                const sortedNews = [...news, { articles, source }].sort(this.compareBySource);
+
+                return {
+                    news: sortedNews
+                };
+            }, this.getNewsFromSearch);
         })
             .catch(({ message }) => console.log(message));
     }
 
     render () {
-
-        if (this.state.loading) {
-            console.log('waiting for data');
-            //return <h2>Loading...</h2>;
-        }
-
-        const { news, sources } = this.state;
+        const { sources, searchCriteria, filteredBySearchNews } = this.state;
         const { api } = this.props;
 
         return (
             <section className = { Styles.container } >
                 <Header />
                 <div className = { Styles.filterBlockWrap } >
-                    <Filter api = { api } getNews = { this.getNews } />
+                    <Filter
+                        api = { api }
+                        getNews = { this.getNews }
+                        getNewsFromDefinedSources = { this.getNewsFromDefinedSources }
+                        sources = { sources }
+                    />
                 </div>
                 <div className = { Styles.contentWrap }>
-                    <Search />
-                    <News news = { news } />
+                    <Search
+                        api = { api }
+                        getNews = { this.getNews }
+                        handleSearchInput = { this.handleSearchInput }
+                        searchCriteria = { searchCriteria }
+                    />
+                    {
+                        sources.length === 0 ? <StartPage /> : <News news = { filteredBySearchNews } sources = { sources } />
+                    }
                 </div>
             </section>
         );
-
     }
 }

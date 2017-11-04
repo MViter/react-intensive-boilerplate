@@ -1,8 +1,7 @@
-.header {
+.container {
   display: inline-flex;
   color: #fff;
   font-weight: 600;
-
   flex-flow: row wrap;
   flex: 0 0 100%;
   background-color: #f77a48;
@@ -20,7 +19,7 @@
   height: auto;
   justify-content: center;
 
-  .container {
+  .header {
     width: 1420px;
     display: flex;
     flex-direction: row;

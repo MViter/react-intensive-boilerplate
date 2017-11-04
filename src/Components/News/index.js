@@ -7,6 +7,7 @@ import Styles from './styles.scss';
 
 // Components
 import NewsItem from '../NewsItem';
+import { getUniqueID } from '../../helpers';
 
 export default class News extends Component {
 
@@ -17,15 +18,17 @@ export default class News extends Component {
     render () {
 
         const { news } = this.props;
-
+        //console.log()
         let newsList = [];
 
+        // console.log(sources);
         news.forEach(({ articles, source }) => {
-            newsList = newsList.concat(articles.map(({ author, description, url, publishedAt, title, urlToImage }, index) => (
+
+            newsList = newsList.concat(articles.map(({ author, description, url, publishedAt, title, urlToImage }) => (
                 <NewsItem
                     author = { author }
                     description = { description }
-                    key = { index }
+                    key = { getUniqueID(10) }
                     publishedAt = { publishedAt }
                     source = { source }
                     title = { title }

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Instruments
-import { string, array, object } from 'prop-types';
+import { string, func, array } from 'prop-types';
 import Styles from './styles.scss';
 
 // Components
@@ -11,25 +11,29 @@ import FilterItem from '../FilterItem';
 export default class Filter extends Component {
 
     static propTypes = {
-        id: string.isRequired
-    };
+        api:                       string.isRequired,
+        getNews:                   func.isRequired,
+        getNewsFromDefinedSources: func.isRequired,
+        sources:                   array.isRequired
+    }
 
     constructor () {
         super();
 
         this.getSources = ::this._getSources;
         this.state = {
-            sources: []
-        }
+            sources:        [],
+            checkedSources: []
+        };
     }
 
-    componentWillMount() {
+    componentWillMount () {
         this._getSources();
     }
 
     _getSources () {
-
         const { api } = this.props;
+
         fetch(`${api}v1/sources`,
             {
                 method: 'GET'
@@ -38,6 +42,7 @@ export default class Filter extends Component {
             if (response.status !== 200) {
                 throw new Error('Sources were not loaded.');
             }
+
             return response.json();
         }).then((response) => {
             this.setState({
@@ -49,10 +54,15 @@ export default class Filter extends Component {
     render () {
 
         const { sources } = this.state;
+        const { getNews, getNewsFromDefinedSources, sources: sourceIDs }  = this.props;
 
         const sourceList = sources.map(({ id }, index) => (
             <FilterItem
-                sourceId = { sources[index].id }
+                getNews = { getNews }
+                getNewsFromDefinedSources = { getNewsFromDefinedSources }
+                key = { id }
+                sourceID = { sources[index].id }
+                sourceIDs = { sourceIDs }
             />
         ));
 
@@ -63,20 +73,5 @@ export default class Filter extends Component {
                 </div>
             </section>
         );
-
-        /* const sourceList = sources.map(({ id }, index) => (
-            <FilterItem sourced = { sources[index].id }/>
-        ));
-
-        return (
-            <section className = { Styles.container }>
-                <div className = { Styles.filter } >
-                    <select name='sourceFilter'>
-                        { sourceList }
-                    </select>
-                </div>
-            </section>
-
-        ); */
     }
 }

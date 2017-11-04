@@ -9,7 +9,9 @@ import Styles from './styles.scss';
 export default class NewsItem extends Component {
 
     static propTypes = {
+        author:      string.isRequired,
         description: string.isRequired,
+        publishedAt: string.isRequired,
         source:      string.isRequired,
         title:       string.isRequired,
         url:         string.isRequired,
@@ -20,7 +22,8 @@ export default class NewsItem extends Component {
 
         const { source, author, title, description, url, urlToImage, publishedAt } = this.props;
 
-        let time;
+        let time ='';
+
         time = publishedAt ?
             time = publishedAt.split('T').join(' ').split('Z').join('')
             : null;
