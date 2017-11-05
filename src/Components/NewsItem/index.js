@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { string } from 'prop-types';
 import Styles from './styles.scss';
 
-
 export default class NewsItem extends Component {
 
     static propTypes = {
@@ -18,15 +17,17 @@ export default class NewsItem extends Component {
         urlToImage:  string.isRequired
     };
 
+    getPublishedTimeInCorrectFormat (time) {
+        return time ?
+            time.split('T').join(' ').split('Z').join('')
+            : null;
+    }
+
     render () {
 
         const { source, author, title, description, url, urlToImage, publishedAt } = this.props;
 
-        let time ='';
-
-        time = publishedAt ?
-            time = publishedAt.split('T').join(' ').split('Z').join('')
-            : null;
+        const time = this.getPublishedTimeInCorrectFormat(publishedAt);
 
         return (
             <section className = { Styles.container }>

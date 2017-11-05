@@ -1,22 +1,41 @@
+$mobileBreak: 479px;
+
 .container {
 
   display: flex;
-  //flex-wrap: wrap;
-  //background-color: #E9EBEE;
   flex-flow: column wrap;
   height: 100%;
   width:100%;
 
   .filter {
-    top: 76px;
+    top: 106px;
     background-color: #4ed2b2;
     width: 200px;
-    position: relative;
+    //position: relative;
     height: 100%;
-    padding: 10px;
+    padding: 90px 10px 0 0;
     margin: 10px;
     font-size: 16px;
     border: 5px solid #4ed2b2;
+
+    &:before {
+      margin-bottom: 50px;
+      content: 'Set source';
+      color: #fff;
+      padding: 10px 0 0 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}
+
+@media (max-width: $mobileBreak) {
+  .container {
+      display: block;
+
+    .filter {
+
+    }
   }
 }
 

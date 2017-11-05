@@ -1,23 +1,64 @@
+@import '../../theme/palette';
+@import '../../theme/devices';
+
 .container {
   display: flex;
   justify-content: center;
-  order: 1;
-  background-color: #adf3e0;
+  background-color: $paletteColor3;
+  flex-direction: row;
+  height: 100%;
 
-  /*.filterBlockWrap {
+  .filterBlockWrap {
     float: left;
-    width: 260px;
-    margin-left: -100%;
-    font-size: 13px;
-    position: relative;
-  }*/
+    width: auto;
+  }
 
-  /*.contentWrap {
-    position: relative;
-    flex-direction: row;
+  .contentWrap {
+    float: right;
+    width: 1180px;
+  }
+
+  .filtersForSmall {
+    display: none;
+  }
+
+}
+
+@media (min-width: $mobile) and (max-width: $tablet) {
+  .container {
     display: flex;
-    vertical-align: baseline;
-    font-size: 100%;
+    justify-content: center;
+    background-color: $paletteColor3;
+    flex-direction: row;
 
-  }*/
+    .filterBlockWrap {
+      display: none;
+    }
+
+    .contentWrap {
+      float: right;
+      width: 1180px;
+    }
+  }
+
+}
+
+@media (max-width: $mobile) {
+  .container {
+    display: flex;
+    justify-content: center;
+    order: 1;
+    background-color: $paletteColor3;
+    flex-direction: row;
+
+    .filterBlockWrap {
+      display: none;
+    }
+
+    .contentWrap {
+      float: right;
+      width: 1180px;
+
+    }
+  }
 }

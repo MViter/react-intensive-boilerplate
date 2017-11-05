@@ -64,33 +64,6 @@ export default class Grid extends Component {
         });
     }
 
-    /*_getSources (callback) {
-
-        // const { api } = this.props;
-        //
-        // // this.setState({ loading: true });
-        // fetch(`${api}v1/sources`,
-        //     {
-        //         method: 'GET'
-        //     }).then((response) => {
-        //
-        //     if (response.status !== 200) {
-        //         throw new Error('Sources were not loaded.');
-        //     }
-        //
-        //     return response.json();
-        // }).then(({ sources }) => {
-
-            this.setState({ loading: false });
-
-            this.state.sources.forEach((source) => {
-                callback.call(this, source);
-            });
-
-        // })
-        //     .catch(({ message }) => console.log(message));
-    } */
-
     _getNewsForAllSources () {
         this.setState(() => ({// {news}
             news: []
@@ -135,13 +108,14 @@ export default class Grid extends Component {
 
             return response.json();
         }).then(({ articles, source }) => {
-
+            console.log('articles ', articles);
             this.setState(({ news }) => {
-                const sortedNews = [...news, { articles, source }].sort(this.compareBySource);
+                /* const sortedNews = [...news, { articles, source }].sort(this.compareBySource);
 
                 return {
                     news: sortedNews
-                };
+                };*/
+                return { news: articles }
             }, this.getNewsFromSearch);
         })
             .catch(({ message }) => console.log(message));

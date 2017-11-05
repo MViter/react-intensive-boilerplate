@@ -25,8 +25,6 @@ export default class FilterItem extends Component {
         const checkBoxValue = event.target.value;
         const isChecked = event.target.checked;
 
-        console.log('event.target.checked = ', event.target.checked);
-
         this.props.getNewsFromDefinedSources(checkBoxValue, this.props.getNews, isChecked);
 
     }

@@ -18,7 +18,7 @@ img{
      -webkit-transition: box-shadow .3s;
      transition: box-shadow .3s;
      word-wrap: break-word;
-     color: #365899;
+     color: $paletteColor10;
 
      &:hover {
        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -38,11 +38,11 @@ img{
 
      .time {
        font-size: 12px;
-       color: grey;
+       color: $paletteColor9;
      }
 
      .source {
-       color: grey;
+       color: $paletteColor9;
      }
 
      .author {

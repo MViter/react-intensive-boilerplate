@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 // Instruments
 import { array } from 'prop-types';
 import Styles from './styles.scss';
+import { TransitionGroup, Transition } from 'react-transition-group';
 
 // Components
 import NewsItem from '../NewsItem';
@@ -13,15 +14,14 @@ export default class News extends Component {
 
     static propTypes = {
         news: array.isRequired
-    };
+    }
 
     render () {
 
         const { news } = this.props;
-        //console.log()
+
         let newsList = [];
 
-        // console.log(sources);
         news.forEach(({ articles, source }) => {
 
             newsList = newsList.concat(articles.map(({ author, description, url, publishedAt, title, urlToImage }) => (
@@ -40,6 +40,7 @@ export default class News extends Component {
 
         return (
             <section className = { Styles.container }>
+               {/*<TransitionGroup>{ newsList }</TransitionGroup>*/}
                 { newsList }
             </section>
         );

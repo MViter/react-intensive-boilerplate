@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterItem component equals to its snapshot 1`] = `
+<section
+  className={undefined}
+>
+  <div
+    className={undefined}
+  >
+    <input
+      onClick={[Function]}
+      type="checkbox"
+      value={undefined}
+    />
+    <a
+      href="#"
+    />
+  </div>
+</section>
+`;
