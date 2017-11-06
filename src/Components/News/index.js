@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // Instruments
 import { array } from 'prop-types';
 import Styles from './styles.scss';
-import { TransitionGroup, Transition } from 'react-transition-group';
+import moment from 'moment';
 
 // Components
 import NewsItem from '../NewsItem';
@@ -23,13 +23,13 @@ export default class News extends Component {
         let newsList = [];
 
         news.forEach(({ articles, source }) => {
-
             newsList = newsList.concat(articles.map(({ author, description, url, publishedAt, title, urlToImage }) => (
+
                 <NewsItem
-                    author = { author }
+                    author = { author ? author : source }
                     description = { description }
                     key = { getUniqueID(10) }
-                    publishedAt = { publishedAt }
+                    publishedAt = { publishedAt ? publishedAt : moment().format('MMMM D h:mm:ss a') }
                     source = { source }
                     title = { title }
                     url = { url }
@@ -40,7 +40,6 @@ export default class News extends Component {
 
         return (
             <section className = { Styles.container }>
-               {/*<TransitionGroup>{ newsList }</TransitionGroup>*/}
                 { newsList }
             </section>
         );

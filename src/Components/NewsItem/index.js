@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { string } from 'prop-types';
 import Styles from './styles.scss';
 
+
 export default class NewsItem extends Component {
 
     static propTypes = {
@@ -25,7 +26,7 @@ export default class NewsItem extends Component {
 
     render () {
 
-        const { source, author, title, description, url, urlToImage, publishedAt } = this.props;
+        const { author, source, title, description, publishedAt, url, urlToImage } = this.props;
 
         const time = this.getPublishedTimeInCorrectFormat(publishedAt);
 

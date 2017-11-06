@@ -32,21 +32,45 @@ export default class Grid extends Component {
         sources:              [],
         loading:              false,
         news:                 [],
-        filteredBySearchNews: [],
+        filteredBySearchNews: [], // think how to rework, should use only one
         searchCriteria:       ''
     };
 
     _getNewsFromDefinedSources (targetSource, callback, isChecked) {
 
-        isChecked ?
-            this.setState((prevState) => ({ sources: [...prevState.sources, targetSource]}), this._getNewsForAllSources)
-            : this.setState((prevState) => {
-                prevState.sources.splice(prevState.sources.indexOf(targetSource), 1);
+        console.log('isChecked ', isChecked);
 
-                return {
-                    sources: prevState.sources
-                };
-            }, this._getNewsForAllSources);
+        isChecked ?
+            this.setState(({ sources }) => ({
+
+                sources: [...sources, targetSource],
+                filteredBySearchNews: []
+            }), this._getNewsForAllSources)
+            : this.setState(({ sources, news, filteredBySearchNews }) => ({
+                sources:              sources.filter((source) => source !== targetSource),
+                news:                 news.filter((item) => item.source !== targetSource),
+                filteredBySearchNews: []
+            }));
+        ;
+
+        // isChecked ?
+        //     this.setState((prevState) => ({
+        //         sources: [...prevState.sources, targetSource],
+        //         news: []
+        //     }), this._getNewsForAllSources)
+        //     : this.setState((prevState) => { // splice is not good idea, re-write with filter
+        //         const newNews = prevState.news.filter((item) => {
+        //             return targetSource !== item.source;
+        //         });
+        //
+        //         console.log('newNews ', newNews);
+        //         prevState.sources.splice(prevState.sources.indexOf(targetSource), 1);
+        //
+        //         return {
+        //             sources: prevState.sources,
+        //             news: newNews
+        //         };
+        //     }, this._getNewsForAllSources);
     }
 
     _getNewsFromSearch () {
@@ -65,6 +89,8 @@ export default class Grid extends Component {
     }
 
     _getNewsForAllSources () {
+
+        console.log('in _getNewsForAllSources');
         this.setState(() => ({// {news}
             news: []
         }), () => {
@@ -93,35 +119,43 @@ export default class Grid extends Component {
         }, this.getNewsFromSearch);
     }
 
-    _getNews (sourceName) {
+    async _getNews (sourceName) {
+
+        console.log('in _getNews');
+
+        if (typeof sourceName !== 'string') {
+            throw new Error('sourceName should be a string.');
+        }
 
         const { api, appID } = this.props;
 
-        fetch(`${api}v1/articles?source=${sourceName}&apiKey=${appID}`,
-            {
-                method: 'GET'
-            }).then((response) => {
-
-            if (response.status !== 200) {
-                throw new Error('News were not loaded.');
-            }
-
-            return response.json();
-        }).then(({ articles, source }) => {
-            console.log('articles ', articles);
-            this.setState(({ news }) => {
-                /* const sortedNews = [...news, { articles, source }].sort(this.compareBySource);
-
-                return {
-                    news: sortedNews
-                };*/
-                return { news: articles }
-            }, this.getNewsFromSearch);
+        await fetch(`${api}v1/articles?source=${sourceName}&apiKey=${appID}`, {
+            method: 'GET'
         })
+            .then((response) => {
+
+                if (response.status !== 200) {
+                    throw new Error('News were not loaded.');
+                }
+
+                return response.json();
+            })
+            .then(({ articles, source }) => {
+
+                this.setState(({ news }) => {
+                    const sortedNews = [...news, { articles, source }].sort(this.compareBySource);
+
+                    return {
+                        news: sortedNews
+                    };
+                }, this.getNewsFromSearch);
+            })
             .catch(({ message }) => console.log(message));
     }
 
     render () {
+
+        console.log('this.state ', this.state);
         const { sources, searchCriteria, filteredBySearchNews } = this.state;
         const { api } = this.props;
 
