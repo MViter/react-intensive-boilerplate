@@ -21,30 +21,6 @@
       flex-direction: row;
       justify-content: space-between;
 
-      .filtersForSmall {
-
-        display: inline-block;
-
-        button {
-          background-color: #fff;
-          color: $paletteColor5;
-          box-sizing: border-box;
-          top: 10px;
-          margin: 17px 0 0 0;
-          font-weight: 600;
-          height: 50px;
-          width: 80px;
-          border: 3px solid $paletteColor5;
-          align-items: center;
-          border-radius: 3px;
-          cursor: pointer;
-
-          &:hover{
-            background-color: $paletteColor6;
-          }
-        }
-      }
-
       .title {
         display: flex;
         flex-direction: row;

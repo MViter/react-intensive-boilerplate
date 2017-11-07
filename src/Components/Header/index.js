@@ -7,7 +7,7 @@ import StylesForMobile from './stylesForMobile.scss';
 import StylesForTablet from './stylesForTablet.scss';
 import logo from '../../theme/assets/newsapi-logo.png';
 import MediaQuery from 'react-responsive';
-import { laptop, tablet, mobile } from '../../theme/devices';
+//import { laptop, tablet, mobile } from '../../theme/devices';
 
 export default class Header extends Component {
 
@@ -20,12 +20,9 @@ export default class Header extends Component {
 
         return (
             <section>
-                <MediaQuery query="(min-device-width: 1224px)">
+                <MediaQuery query = '(min-device-width: 875px)'>
                     <section className = { Styles.container }>
                         <div className = { Styles.header }>
-                    <span className = { Styles.filtersForSmall } >
-                        <button value = 'Filters'>Sources</button>
-                    </span>
                             <a className = { Styles.title } href = '#' >
                                 <img alt = 'logo' className = { Styles.logo } src = { logo } />
                                 <h2 className = { Styles.titleText } />
@@ -40,12 +37,9 @@ export default class Header extends Component {
                     </section>
                 </MediaQuery>
 
-                <MediaQuery query="(min-device-width: 813px)">
+                <MediaQuery query = '(max-device-width: 874px)'>
                     <section className = { StylesForTablet.container }>
                         <div className = { StylesForTablet.header }>
-                    <span className = { StylesForTablet.filtersForSmall } >
-                        <button value = 'Filters'>Sources</button>
-                    </span>
                             <a className = { StylesForTablet.title } href = '#' >
                                 <img alt = 'logo' className = { Styles.logo } src = { logo } />
                                 <h2 className = { StylesForTablet.titleText } />
@@ -60,12 +54,9 @@ export default class Header extends Component {
                     </section>
                 </MediaQuery>
 
-                <MediaQuery query="(min-device-width: 479px)">
+                <MediaQuery query = '(max-device-width: 479px)'>
                     <section className = { StylesForMobile.container }>
                         <div className = { StylesForMobile.header }>
-                    <span className = { StylesForMobile.filtersForSmall } >
-                        <button value = 'Filters'>Sources</button>
-                    </span>
                             <a className = { StylesForMobile.title } href = '#' >
                                 <img alt = 'logo' className = { StylesForMobile.logo } src = { logo } />
                                 <h2 className = { StylesForMobile.titleText } />

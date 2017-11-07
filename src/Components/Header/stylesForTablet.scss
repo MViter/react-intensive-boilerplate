@@ -1,6 +1,12 @@
 @import '../../theme/palette';
 @import '../../theme/devices';
 
+img {
+  width: 50px;
+  height: auto;
+  justify-content: center;
+}
+
 .container {
     display: inline-flex;
     color: #fff;
@@ -20,31 +26,6 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-
-      .filtersForSmall {
-
-        display: inline-block;
-
-        button {
-          box-sizing: border-box;
-          top: 10px;
-          width: 100px;
-          height: 45px;
-          margin: 17px 0 0 0;
-          border: solid 3px $paletteColor5;
-          font-weight: 600;
-          border-radius: 3px;
-          background-color: #fff;
-          color: $paletteColor5;
-          letter-spacing: 1px;
-          cursor: pointer;
-          box-shadow: 0 1px 2px rgba(0,0,0,.3);
-
-          &:hover {
-            background-color: $paletteColor6;
-          }
-        }
-      }
 
       .title {
         display: flex;
