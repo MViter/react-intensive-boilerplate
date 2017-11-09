@@ -7,9 +7,20 @@ import StylesForMobile from './stylesForMobile.scss';
 import StylesForTablet from './stylesForTablet.scss';
 import logo from '../../theme/assets/newsapi-logo.png';
 import MediaQuery from 'react-responsive';
-//import { laptop, tablet, mobile } from '../../theme/devices';
+import { Transition } from 'react-transition-group';
+import TweenMax, { Linear } from 'gsap';
 
 export default class Header extends Component {
+
+    constructor () {
+        super();
+
+        this.handleLogoAppear = ::this._handleLogoAppear;
+    }
+
+    _handleLogoAppear () {
+        TweenMax.to('#logo', 4, { rotation: 360, transformOrigin: '0px', repeat: 100, ease: Linear.easeNone });
+    }
 
     render () {
 
@@ -20,55 +31,72 @@ export default class Header extends Component {
 
         return (
             <section>
-                <MediaQuery query = '(min-device-width: 875px)'>
-                    <section className = { Styles.container }>
+                <MediaQuery query = '(min-device-width: 1064px)'>
+                    <div className = { Styles.container }>
                         <div className = { Styles.header }>
-                            <a className = { Styles.title } href = '#' >
-                                <img alt = 'logo' className = { Styles.logo } src = { logo } />
-                                <h2 className = { Styles.titleText } />
-                            </a>
-
+                            <Transition
+                                appear
+                                in
+                                timeout = { 5000 }
+                                onEnter = { this._handleLogoAppear } >
+                                <a className = { Styles.title } href = '#' >
+                                    <img alt = 'logo' className = { Styles.logo } id = 'logo' src = { logo } />
+                                    <h2 className = { Styles.titleText } />
+                                </a>
+                            </Transition>
                             <nav className = { Styles.nav }>
                                 <ul>
                                     { menuItems }
                                 </ul>
                             </nav>
                         </div>
-                    </section>
+                    </div>
                 </MediaQuery>
 
-                <MediaQuery query = '(max-device-width: 874px)'>
-                    <section className = { StylesForTablet.container }>
-                        <div className = { StylesForTablet.header }>
-                            <a className = { StylesForTablet.title } href = '#' >
-                                <img alt = 'logo' className = { Styles.logo } src = { logo } />
-                                <h2 className = { StylesForTablet.titleText } />
-                            </a>
-
-                            <nav className = { StylesForTablet.nav }>
-                                <ul>
-                                    { menuItems }
-                                </ul>
-                            </nav>
+                <MediaQuery query = '(max-device-width: 1063px)'>
+                    <MediaQuery query = '(min-device-width: 480px)'>
+                        <div className = { StylesForTablet.container }>
+                            <div className = { StylesForTablet.header }>
+                                <Transition
+                                    appear
+                                    in
+                                    timeout = { 5000 }
+                                    onEnter = { this._handleLogoAppear } >
+                                    <a className = { StylesForTablet.title } href = '#' >
+                                        <img alt = 'logo' className = { Styles.logo } id = 'logo' src = { logo } />
+                                        <h2 className = { StylesForTablet.titleText } />
+                                    </a>
+                                </Transition>
+                                <nav className = { StylesForTablet.nav }>
+                                    <ul>
+                                        { menuItems }
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                    </section>
-                </MediaQuery>
+                    </MediaQuery>
 
-                <MediaQuery query = '(max-device-width: 479px)'>
-                    <section className = { StylesForMobile.container }>
-                        <div className = { StylesForMobile.header }>
-                            <a className = { StylesForMobile.title } href = '#' >
-                                <img alt = 'logo' className = { StylesForMobile.logo } src = { logo } />
-                                <h2 className = { StylesForMobile.titleText } />
-                            </a>
-
-                            <nav className = { StylesForMobile.nav }>
-                                <ul>
-                                    { menuItems }
-                                </ul>
-                            </nav>
+                    <MediaQuery query = '(max-device-width: 479px)'>
+                        <div className = { StylesForMobile.container }>
+                            <div className = { StylesForMobile.header }>
+                                <Transition
+                                    appear
+                                    in
+                                    timeout = { 5000 }
+                                    onEnter = { this._handleLogoAppear } >
+                                    <a className = { StylesForMobile.title } href = '#' >
+                                        <img alt = 'logo' className = { StylesForMobile.logo } id = 'logo' src = { logo } />
+                                        <h2 className = { StylesForMobile.titleText } />
+                                    </a>
+                                </Transition>
+                                <nav className = { StylesForMobile.nav }>
+                                    <ul>
+                                        { menuItems }
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                    </section>
+                    </MediaQuery>
                 </MediaQuery>
             </section>
         );

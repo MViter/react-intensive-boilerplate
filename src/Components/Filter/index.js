@@ -15,7 +15,7 @@ export default class Filter extends Component {
         getNews:                   func.isRequired,
         getNewsFromDefinedSources: func.isRequired,
         sources:                   array.isRequired
-    }
+    };
 
     constructor () {
         super();
@@ -31,10 +31,10 @@ export default class Filter extends Component {
         this._getSources();
     }
 
-    _getSources () {
+    async _getSources () {
         const { api } = this.props;
 
-        fetch(`${api}v1/sources`,
+        await fetch(`${api}v1/sources`,
             {
                 method: 'GET'
             }).then((response) => {

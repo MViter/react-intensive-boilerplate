@@ -23,7 +23,6 @@ export default class NewsItem extends Component {
             time.split('T').join(' ').split('Z').join('')
             : null;
     }
-
     render () {
 
         const { author, source, title, description, publishedAt, url, urlToImage } = this.props;

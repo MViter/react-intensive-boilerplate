@@ -1,31 +1,32 @@
 @import '../../theme/palette';
-
-img{
-     width:280px;
-     height: auto;
-     justify-content: center;
-   }
+@import '../../theme/devices';
 
 .newsItem {
-     flex-wrap: wrap;
-     flex-direction: row;
-     width: 320px;
-     background-color: lightyellow;
-     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-     border-radius: 5px;
-     padding: 10px;
-     margin: 10px;
-     -webkit-transition: box-shadow .3s;
-     transition: box-shadow .3s;
-     word-wrap: break-word;
-     color: $paletteColor10;
+      flex-direction: row;
+      width: 269px;
+      background-color: $paletteColor11;
+      color: $paletteColor10;
+      flex-wrap: wrap;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      border-radius: 5px;
+      padding: 10px;
+      margin: 0px 5px 5px 0;
+      -webkit-transition: box-shadow .3s;
+      transition: box-shadow .3s;
+      word-wrap: break-word;
 
      &:hover {
        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
        cursor: pointer;
      }
 
-      a{
+      img {
+        width:280px;
+        height: auto;
+        justify-content: center;
+      }
+
+      a {
         text-decoration: none;
       }
 
@@ -44,14 +45,58 @@ img{
      .source {
        color: $paletteColor9;
      }
+}
 
-     .author {
+@media (max-width: $mobile) {
+  .newsItem {
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    background-color: $paletteColor11;
+    color: $paletteColor10;
+    flex-wrap: wrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    padding: 2px;
+    border-radius: 0;
+    margin: 2px;
+    -webkit-transition: box-shadow .3s;
+    transition: box-shadow .3s;
 
-     }
+    &:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      cursor: pointer;
+    }
 
-     .description {
+    img {
+      display: none;
+    }
 
-     }
+    a {
+      text-decoration: none;
+      font-weight: 300;
+      font-size: 12px;
+
+        .title {
+          text-decoration: none;
+          font-weight: 300;
+          font-size: 12px;
+        }
+
+        .time {
+          display: none;
+        }
+
+        .source {
+          display: none;
+        }
+        .author {
+          display: none;
+        }
+
+    }
+
+  }
+
 }
 
 

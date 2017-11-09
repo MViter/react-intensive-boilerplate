@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilterItem component equals to its snapshot 1`] = `
+exports[`<FilterItem/> component tests:  Component should be equal to its snapshot 1`] = `
 <section
   className={undefined}
 >
@@ -10,11 +10,13 @@ exports[`FilterItem component equals to its snapshot 1`] = `
     <input
       onClick={[Function]}
       type="checkbox"
-      value={undefined}
+      value="abc-news"
     />
     <a
       href="#"
-    />
+    >
+      abc-news
+    </a>
   </div>
 </section>
 `;

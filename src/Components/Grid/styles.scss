@@ -1,5 +1,4 @@
 @import '../../theme/palette';
-@import '../../theme/devices';
 
 .container {
   display: flex;
@@ -17,48 +16,5 @@
     float: right;
     width: 1180px;
   }
-
-  .filtersForSmall {
-    display: none;
-  }
-
 }
 
-@media (min-width: $mobile) and (max-width: $tablet) {
-  .container {
-    display: flex;
-    justify-content: center;
-    background-color: $paletteColor3;
-    flex-direction: row;
-
-    .filterBlockWrap {
-      display: none;
-    }
-
-    .contentWrap {
-      float: right;
-      width: 1180px;
-    }
-  }
-
-}
-
-@media (max-width: $mobile) {
-  .container {
-    display: flex;
-    justify-content: center;
-    order: 1;
-    background-color: $paletteColor3;
-    flex-direction: row;
-
-    .filterBlockWrap {
-      display: none;
-    }
-
-    .contentWrap {
-      float: right;
-      width: 1180px;
-
-    }
-  }
-}

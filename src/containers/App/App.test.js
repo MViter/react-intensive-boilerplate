@@ -7,9 +7,9 @@ import App from './';
 Enzyme.configure({ adapter: new Adapter() });
 
 const result = mount(<App />);
-describe('NewsItem component: ', () => {
+describe('App container: ', () => {
     test('<App/> should have 1 root element Section', () => {
         console.log('result ', result);
-        expect(result.find('section').length).toBe(5);
+        expect(result.find('section').length).toBe(1);
     });
 });

@@ -16,7 +16,10 @@ const news = [{
     articles
 }];
 const articlesLength = articles.length;
-const result = render(<News  news = { news }/>);
-test('<News /> should render <section> element for each article', () => {
-    expect(result.find('section').length).toBe(articlesLength);
+const result = render(<News news = { news } />);
+
+describe('<News/> component tests: ', () => {
+    test('Should render <section> element for each article', () => {
+        expect(result.find('section').length).toBe(articlesLength);
+    });
 });

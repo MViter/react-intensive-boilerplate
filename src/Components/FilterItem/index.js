@@ -17,11 +17,9 @@ export default class FilterItem extends Component {
     constructor () {
         super();
         this.handleCheckboxClicking = ::this._handleCheckboxClicking;
-        // this.getNewsFromDefinedSources = ::this._getNewsFromDefinedSources;
     }
 
     _handleCheckboxClicking (event) {
-        //event.preventDefault();
         const checkBoxValue = event.target.value;
         const isChecked = event.target.checked;
 
@@ -38,7 +36,6 @@ export default class FilterItem extends Component {
                 <div className = { Styles.filterItem } >
                     <input
                         type = 'checkbox'
-                        //checked = {sourceID.indexOf(sourceIDs) !== -1}
                         value = { sourceID }
                         onClick = { this.handleCheckboxClicking }
                     />

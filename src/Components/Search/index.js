@@ -10,7 +10,7 @@ export default class Search extends Component {
     static propTypes = {
         handleSearchInput: func.isRequired,
         searchCriteria:    string.isRequired
-    }
+    };
 
     constructor () {
         super();

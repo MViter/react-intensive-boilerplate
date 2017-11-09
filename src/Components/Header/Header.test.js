@@ -7,6 +7,13 @@ import Header from './';
 Enzyme.configure({ adapter: new Adapter() });
 
 const result = shallow(<Header />);
-test('<Header/> should have 1 root element Section', () => {
-    expect(result.find('section').length).toBe(1);
+
+describe('<Header/> component tests: ', () => {
+    test('Should have 3 img elenemts', () => {
+        expect(result.find('img').length).toBe(3);
+    });
+
+    test('Should have 1 section elenemts', () => {
+        expect(result.find('section').length).toBe(1);
+    });
 });

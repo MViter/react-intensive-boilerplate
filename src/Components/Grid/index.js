@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 // Instruments
 import { string } from 'prop-types';
 import Styles from './styles.scss';
+import StylesForMobile from './stylesForMobile.scss';
+import StylesForTablet from './stylesForTablet.scss';
+import MediaQuery from 'react-responsive';
 
 // Components
 import News from '../News';
@@ -32,45 +35,23 @@ export default class Grid extends Component {
         sources:              [],
         loading:              false,
         news:                 [],
-        filteredBySearchNews: [], // think how to rework, should use only one
+        filteredBySearchNews: [],
         searchCriteria:       ''
     };
 
     _getNewsFromDefinedSources (targetSource, callback, isChecked) {
 
-        console.log('isChecked ', isChecked);
-
         isChecked ?
             this.setState(({ sources }) => ({
 
-                sources: [...sources, targetSource],
+                sources:              [...sources, targetSource],
                 filteredBySearchNews: []
             }), this._getNewsForAllSources)
-            : this.setState(({ sources, news, filteredBySearchNews }) => ({
+            : this.setState(({ sources, news }) => ({
                 sources:              sources.filter((source) => source !== targetSource),
                 news:                 news.filter((item) => item.source !== targetSource),
                 filteredBySearchNews: []
             }));
-        ;
-
-        // isChecked ?
-        //     this.setState((prevState) => ({
-        //         sources: [...prevState.sources, targetSource],
-        //         news: []
-        //     }), this._getNewsForAllSources)
-        //     : this.setState((prevState) => { // splice is not good idea, re-write with filter
-        //         const newNews = prevState.news.filter((item) => {
-        //             return targetSource !== item.source;
-        //         });
-        //
-        //         console.log('newNews ', newNews);
-        //         prevState.sources.splice(prevState.sources.indexOf(targetSource), 1);
-        //
-        //         return {
-        //             sources: prevState.sources,
-        //             news: newNews
-        //         };
-        //     }, this._getNewsForAllSources);
     }
 
     _getNewsFromSearch () {
@@ -90,8 +71,7 @@ export default class Grid extends Component {
 
     _getNewsForAllSources () {
 
-        console.log('in _getNewsForAllSources');
-        this.setState(() => ({// {news}
+        this.setState(() => ({
             news: []
         }), () => {
             if (this.state.sources) {
@@ -120,8 +100,6 @@ export default class Grid extends Component {
     }
 
     async _getNews (sourceName) {
-
-        console.log('in _getNews');
 
         if (typeof sourceName !== 'string') {
             throw new Error('sourceName should be a string.');
@@ -155,32 +133,85 @@ export default class Grid extends Component {
 
     render () {
 
-        console.log('this.state ', this.state);
         const { sources, searchCriteria, filteredBySearchNews } = this.state;
         const { api } = this.props;
 
         return (
-            <section className = { Styles.container } >
-                <Header />
-                <div className = { Styles.filterBlockWrap } >
-                    <Filter
-                        api = { api }
-                        getNews = { this.getNews }
-                        getNewsFromDefinedSources = { this.getNewsFromDefinedSources }
-                        sources = { sources }
-                    />
-                </div>
-                <div className = { Styles.contentWrap }>
-                    <Search
-                        api = { api }
-                        getNews = { this.getNews }
-                        handleSearchInput = { this.handleSearchInput }
-                        searchCriteria = { searchCriteria }
-                    />
-                    {
-                        sources.length === 0 ? <StartPage /> : <News news = { filteredBySearchNews } sources = { sources } />
-                    }
-                </div>
+            <section>
+                <MediaQuery query = '(min-device-width: 870px)'>
+                    <section className = { Styles.container } >
+                        <Header />
+                        <div className = { Styles.filterBlockWrap } >
+                            <Filter
+                                api = { api }
+                                getNews = { this.getNews }
+                                getNewsFromDefinedSources = { this.getNewsFromDefinedSources }
+                                sources = { sources }
+                            />
+                        </div>
+                        <div className = { Styles.contentWrap }>
+                            <Search
+                                api = { api }
+                                getNews = { this.getNews }
+                                handleSearchInput = { this.handleSearchInput }
+                                searchCriteria = { searchCriteria }
+                            />
+                            {
+                                sources.length === 0 ? <StartPage /> : <News news = { filteredBySearchNews } sources = { sources } />
+                            }
+                        </div>
+                    </section>
+                </MediaQuery>
+
+                <MediaQuery query = '(max-device-width: 869px)'>
+                    <section className = { StylesForTablet.container } >
+                        <Header />
+                        <div className = { StylesForTablet.filterBlockWrap } >
+                            <Filter
+                                api = { api }
+                                getNews = { this.getNews }
+                                getNewsFromDefinedSources = { this.getNewsFromDefinedSources }
+                                sources = { sources }
+                            />
+                        </div>
+                        <div className = { StylesForTablet.contentWrap }>
+                            <Search
+                                api = { api }
+                                getNews = { this.getNews }
+                                handleSearchInput = { this.handleSearchInput }
+                                searchCriteria = { searchCriteria }
+                            />
+                            {
+                                sources.length === 0 ? <StartPage /> : <News news = { filteredBySearchNews } sources = { sources } />
+                            }
+                        </div>
+                    </section>
+                </MediaQuery>
+
+                <MediaQuery query = '(max-device-width: 479px)'>
+                    <section className = { StylesForMobile.container } >
+                        <Header />
+                        <div className = { StylesForMobile.filterBlockWrap } >
+                            <Filter
+                                api = { api }
+                                getNews = { this.getNews }
+                                getNewsFromDefinedSources = { this.getNewsFromDefinedSources }
+                                sources = { sources }
+                            />
+                        </div>
+                        <div className = { StylesForMobile.contentWrap }>
+                            <Search
+                                api = { api }
+                                getNews = { this.getNews }
+                                handleSearchInput = { this.handleSearchInput }
+                                searchCriteria = { searchCriteria }
+                            />
+                            {
+                                sources.length === 0 ? <StartPage /> : <News news = { filteredBySearchNews } sources = { sources } />
+                            }
+                        </div>
+                    </section>
+                </MediaQuery>
             </section>
         );
     }

@@ -14,7 +14,7 @@ export default class News extends Component {
 
     static propTypes = {
         news: array.isRequired
-    }
+    };
 
     render () {
 
@@ -24,9 +24,8 @@ export default class News extends Component {
 
         news.forEach(({ articles, source }) => {
             newsList = newsList.concat(articles.map(({ author, description, url, publishedAt, title, urlToImage }) => (
-
                 <NewsItem
-                    author = { author ? author : source }
+                    author = { author ? author : source } // some news doesnt have initially author or publishedAt data
                     description = { description }
                     key = { getUniqueID(10) }
                     publishedAt = { publishedAt ? publishedAt : moment().format('MMMM D h:mm:ss a') }

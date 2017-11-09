@@ -1,0 +1,17 @@
+@import '../../theme/palette';
+
+.container {
+    display: flex;
+    justify-content: center;
+    background-color: $paletteColor3;
+    flex-direction: row;
+
+    .filterBlockWrap {
+      display: none;
+    }
+
+    .contentWrap {
+      float: right;
+      width: 1180px;
+    }
+}
